@@ -12,7 +12,7 @@ public class EmpMain {
 		while (true) {
 			
 			System.out.println("------------------------------------------");
-			System.out.println("1.전체조회 2.검색 3.입력 4.수정 5. 삭제 6. 종료");
+			System.out.println("1.전체조회 2.검색 3.입력 4.수정 5. 삭제 6. 종료 7.부서별조회");
 			System.out.println("------------------------------------------");
 			System.out.println("선택> ");
 			int selectNo = scn.nextInt();
@@ -91,10 +91,23 @@ public class EmpMain {
 				int empId = scn.nextInt(); scn.nextLine(); 
 				
 				service.deleteEmp(empId);
+			
 
 			} else if (selectNo == 6) {
 				break;
+				
+			}else if (selectNo == 7) {
+				scn.nextLine();
+				System.out.println("조회할 부서: ");
+				String dept = scn.nextLine();
+				List<EmployeeVO> list = service.getDeptList(dept);
+				for(Object vo :list) {
+					EmployeeVO 	emp = (EmployeeVO) vo;
+					emp.showEmpInfo();
+					
+					
+				
 			}
 		}
 	}
-}
+}}

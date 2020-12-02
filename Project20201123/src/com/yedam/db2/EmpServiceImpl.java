@@ -7,7 +7,7 @@ public class EmpServiceImpl implements EmpService {
 	EmpDAO dao = new EmpDAO();
 
 	@Override
-	public List getEmpList() {
+	public List<?> getEmpList() {
 	
 		return dao.getEmpList();
 	}
@@ -35,6 +35,12 @@ public class EmpServiceImpl implements EmpService {
 	public void deleteEmp(int empId) {
 		dao.deleteEmp(empId);
 		
+	}
+
+	@Override
+	public List<EmployeeVO> getDeptList(String dept) {
+		
+		return dao.deptList(dept);
 	}
 	
 

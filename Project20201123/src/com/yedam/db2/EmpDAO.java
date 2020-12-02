@@ -14,6 +14,7 @@ public class EmpDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	String sql;
+	private List<EmployeeVO> employeeVO = new ArrayList();
 
 	// 전체조회
 	public List getEmpList() {
@@ -128,4 +129,31 @@ public class EmpDAO {
 
 		}
 	}
+	//부서별 조회
+	public List<EmployeeVO> deptList(String dept) {
+			int i = 0;
+			conn = DAO.getConnection();
+			sql = "SELECT*FROM emp1 where department_id = (select department_id from departments where department_name = '" + dept + "')";
+			System.out.println(sql);
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					EmployeeVO employee = new EmployeeVO();
+					i++;
+					employee.setEmployeeId(rs.getInt("employee_id"));
+					employee.setFirstName(rs.getString("first_name"));
+					employeeVO.add(employee);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (i > 0) {
+				return employeeVO;
+
+			} else {
+				return null;
+	}
+}
 }
