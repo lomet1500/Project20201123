@@ -11,6 +11,7 @@ public class Member implements Comparable<Member> {
 	public int compareTo(Member o) {
 
 		return name.compareTo(o.name);
+		1
 	}
 
 }
